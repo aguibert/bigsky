@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.net.InetAddress;
+import java.net.Inet4Address;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -96,7 +96,7 @@ public class Login extends JFrame {
 		image.add(wrongInfo);
 		wrongInfo.setVisible(false);
 		
-		promptRegister = new JLabel("Would you like to register");
+		promptRegister = new JLabel("Would you like to register?");
 		promptRegister.setForeground(Color.RED);
 		promptRegister.setBounds(259, 233, 192, 14);
 		image.add(promptRegister);
@@ -185,7 +185,7 @@ public class Login extends JFrame {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection(Global.DATABASE_URL, Global.DATABASE_USERNAME, Global.DATABASE_PASSWORD);
 		Statement stmt = con.createStatement();
-		String iP =InetAddress.getLocalHost().getHostAddress();		
+		String iP =Inet4Address.getLocalHost().getHostAddress();		
 		
 		ResultSet rs = con.createStatement().executeQuery("select * from " + Global.DATABASE_TABLENAME + " where phoneNumber='" + getUsername() + "'");
 	

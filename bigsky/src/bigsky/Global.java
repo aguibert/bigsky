@@ -45,4 +45,5 @@ public class Global {
 	public final static String DATABASE_USERNAME = "adm309";
 	public final static String DATABASE_PASSWORD = "EXbDqudt4";
 	public final static String DATABASE_TABLENAME = "testTable";
+	public static boolean loggingEnabled = true;
 }
