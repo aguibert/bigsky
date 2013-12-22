@@ -12,6 +12,7 @@ import bigsky.BlueTextRequest.REQUEST;
 import bigsky.BlueTextResponse;
 import bigsky.Contact;
 import bigsky.Global;
+import bigsky.Logger;
 import bigsky.TaskBar;
 import bigsky.TextMessage;
 import bigsky.gui.Conversation;
@@ -143,7 +144,7 @@ public class RequestManager extends Thread
 	} // end try
 	catch (InterruptedException e) {
 		e.printStackTrace();
-		System.err.println("Synchronized method block -FAILED");
+		Logger.printErr("Synchronized method block -FAILED");
 	}
 	}
 	
@@ -221,7 +222,7 @@ public class RequestManager extends Thread
 				Conversation.setThumbnailPicture(requestedContact);
 			}
 			else{
-				System.err.println("WARNING: an unknown response was received from the phone.");
+				Logger.printErr("WARNING: an unknown response was received from the phone.");
 			}
 		} // End while loop
 	}	

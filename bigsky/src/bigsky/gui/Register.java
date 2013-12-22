@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 import bigsky.Global;
+import bigsky.Logger;
 
 @SuppressWarnings("serial")
 public class Register extends JFrame {
@@ -230,7 +231,7 @@ public class Register extends JFrame {
 				return false;
 			}
 		}catch(Exception e){
-			System.err.println("Register Checks error" + e.getMessage());
+			Logger.printErr("Register Checks error" + e.getMessage());
 		}
 		if(pass == null || confirmPass == null || pass.equals("")|| confirmPass.equals("")|| !pass.equals(confirmPass)){
 			passwordIncorrect.setVisible(true);
@@ -275,7 +276,7 @@ public class Register extends JFrame {
 		stmt.executeUpdate(query);
 		con.close();	
 		}catch(Exception e){
-			System.err.println("put in system error");
+			Logger.printErr("put in system error");
 		}
 	}
 	
@@ -299,7 +300,7 @@ public class Register extends JFrame {
 		rs.close();		
 		con.close();
 		}catch(Exception e){
-			System.err.println("in system error");
+			Logger.printErr("in system error");
 		}
 		return false;
 	}

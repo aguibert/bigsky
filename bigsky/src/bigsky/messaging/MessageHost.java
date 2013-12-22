@@ -7,6 +7,7 @@ import bigsky.BlueTextRequest;
 import bigsky.BlueTextRequest.REQUEST;
 import bigsky.BlueTextResponse;
 import bigsky.Contact;
+import bigsky.Logger;
 import bigsky.TaskBar;
 import bigsky.TextMessage;
 import bigsky.gui.Conversation;
@@ -69,7 +70,7 @@ class ReadThread implements Runnable
 					}
 				}
 				else{
-					System.err.println("ERROR: Unknown object sent through stream");
+					Logger.printErr("ERROR: Unknown object sent through stream");
 				}
 			}
 		} catch (Exception e) {
@@ -119,7 +120,7 @@ public class MessageHost extends Thread{
 			sendObject(new BlueTextRequest(REQUEST.BATTERY_PERCENTAGE, null));
 		} catch(Exception e){
 			e.printStackTrace();
-			System.err.println("Caught exception while setting up MessageHost" + e.getMessage());
+			Logger.printErr("Caught exception while setting up MessageHost" + e.getMessage());
 			closeHost(true);
 		}
 	}
@@ -185,7 +186,7 @@ public class MessageHost extends Thread{
 			ps2.flush();
 		} catch(Exception e){
 			e.printStackTrace();
-			System.err.println("Got exception in MessageHost.sendObject(): " + e.getMessage());
+			Logger.printErr("Got exception in MessageHost.sendObject(): " + e.getMessage());
 		}
 	}
 }

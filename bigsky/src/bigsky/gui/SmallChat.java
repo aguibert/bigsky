@@ -26,6 +26,7 @@ import javax.swing.JTextPane;
 
 import bigsky.Contact;
 import bigsky.Global;
+import bigsky.Logger;
 import bigsky.TaskBar;
 import bigsky.TextMessage;
 import bigsky.messaging.RequestManager;
@@ -261,7 +262,7 @@ public class SmallChat  {
 		try {
 			prop.load(new FileInputStream(Global.username +".properties"));
 		} catch (Exception e) {
-			System.err.println("file load problem.");
+			Logger.printErr("file load problem.");
 		}
 			
 		if(prop.getProperty(Global.NOTIFICATION).equals(Global.ON)){
@@ -288,7 +289,7 @@ public class SmallChat  {
 		try {
 			prop.load(new FileInputStream(Global.username +".properties"));
 		} catch (Exception e) {
-			System.err.println("file load problem.");
+			Logger.printErr("file load problem.");
 		}
 		
 		prop.setProperty("save", Global.OFF);
@@ -300,7 +301,7 @@ public class SmallChat  {
 			prop.store(new FileOutputStream(Global.username + ".properties"), null);
 		}
 		catch(Exception e1){
-			System.err.println("Problem saving default settings in small chat");
+			Logger.printErr("Problem saving default settings in small chat");
 		}
 		textPane.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, Integer.valueOf(TaskBar.savedInfo(Global.conversationFontSize))));
 	}

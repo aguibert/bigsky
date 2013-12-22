@@ -16,6 +16,7 @@ import javax.swing.Timer;
 import javax.swing.text.BadLocationException;
 
 import bigsky.Global;
+import bigsky.Logger;
 import bigsky.TaskBar;
 import bigsky.TextMessage;
 import java.awt.Font;
@@ -49,7 +50,7 @@ public class Notification {
 		try {
 			initialize();
 		} catch (BadLocationException e) {
-			System.err.println("ERROR in Notification Initialize()");
+			Logger.printErr("ERROR in Notification Initialize()");
 			e.printStackTrace();
 		}
 		

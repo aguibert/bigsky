@@ -46,6 +46,7 @@ import bigsky.BlueTextRequest;
 import bigsky.BlueTextRequest.REQUEST;
 import bigsky.Contact;
 import bigsky.Global;
+import bigsky.Logger;
 import bigsky.TaskBar;
 import bigsky.TextMessage;
 import bigsky.messaging.RequestManager;
@@ -354,7 +355,7 @@ public class Conversation {
 					updateConv(text);
 				} catch (BadLocationException e) {
 					e.printStackTrace();
-					System.err.println("updateConv in Conversation - FAILED");
+					Logger.printErr("updateConv in Conversation - FAILED");
 				}
             	txtrEnterMessageHere.setText("");
 			}
@@ -378,7 +379,7 @@ public class Conversation {
 						updateConv(text);
 					} catch (BadLocationException e) {
 						e.printStackTrace();
-						System.err.println("updateConv in Conversation - FAILED");
+						Logger.printErr("updateConv in Conversation - FAILED");
 					}
 	            	txtrEnterMessageHere.setText("");
 	            }
@@ -438,7 +439,7 @@ public class Conversation {
 				EditContact editCon = new EditContact(selectedContactCon, i, selectedValue);
 				editCon.getFrmEditContact().setVisible(true);
 			}
-			else System.err.println("Error in Edit Contact");
+			else Logger.printErr("Error in Edit Contact");
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "Please select a contact to edit.");
@@ -700,7 +701,7 @@ public class Conversation {
 			// added if check
 			if(offset.size() <= current){
 				current = offset.size()-1;
-				System.err.println("Error in updateConv()");
+				Logger.printErr("Error in updateConv()");
 			}
 				
 			temp = offset.get(current);
@@ -832,7 +833,7 @@ public class Conversation {
 		}
 		catch(Exception e1){
 			e1.printStackTrace();
-			System.err.println("Problem saving default settings in small chat");
+			Logger.printErr("Problem saving default settings in small chat");
 		}
 		
 		updateTabFonts();

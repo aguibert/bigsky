@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 
 import bigsky.Contact;
 import bigsky.Global;
+import bigsky.Logger;
 import bigsky.TaskBar;
 import bigsky.messaging.MessageHost;
 import bigsky.messaging.RequestManager;
@@ -220,7 +221,7 @@ public class Login extends JFrame {
 		rs.close();		
 		con.close();
 		}catch(Exception e){
-			System.err.println("Login fail" + e.getMessage());
+			Logger.printErr("Login fail" + e.getMessage());
 		}
 		
 		return true;
@@ -247,7 +248,7 @@ public class Login extends JFrame {
 				prop.store(new FileOutputStream(getUsername() + ".properties"),null);
 				
 			} catch (Exception e1) {
-				System.err.println("file load problem.");
+				Logger.printErr("file load problem.");
 			}
 		}
 	}
@@ -271,7 +272,7 @@ public class Login extends JFrame {
 			rs.close();		
 			con.close();
 		}catch(Exception e){
-			System.err.println("Login fail" + e.getMessage());
+			Logger.printErr("Login fail" + e.getMessage());
 		}
 		
     	return me;
@@ -290,7 +291,7 @@ public class Login extends JFrame {
 		try {
 			prop.load(new FileInputStream(user +".properties"));
 		} catch (Exception e) {
-			System.err.println("File load problem.");
+			Logger.printErr("File load problem.");
 		}
 		
 		prop.setProperty(property, value);
@@ -298,7 +299,7 @@ public class Login extends JFrame {
 		try {
 			prop.store(new FileOutputStream(user+".properties"),null);
 		} catch (Exception e) {
-			System.err.println("file store problem.");
+			Logger.printErr("file store problem.");
 		}
 		
 	}
@@ -319,7 +320,7 @@ public class Login extends JFrame {
 		try{
 			prop.store(new FileOutputStream("system.properties"), null);
 		}catch(Exception e1){
-			System.err.println("System store file problem");				
+			Logger.printErr("System store file problem");				
 		}
 	}
 }

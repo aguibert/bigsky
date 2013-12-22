@@ -44,6 +44,9 @@ public class TaskBar
 	public static HashMap<ActionListener, MenuItem> menuItemTOactionListener = new HashMap<ActionListener, MenuItem>();
 
     public static void main(String[] args) {
+    	
+    	new Logger();
+    	
         try {
         	UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
         } catch (Exception ex) {
@@ -127,7 +130,7 @@ public class TaskBar
         try {
             tray.add(trayIcon);
         } catch (AWTException e) {
-            System.err.println("TrayIcon could not be added.");
+            Logger.printErr("TrayIcon could not be added.");
         }
     }
     
@@ -141,7 +144,7 @@ public class TaskBar
        Image icon = new ImageIcon(imageURL, "tray icon").getImage();
 
         if (imageURL == null) {
-            System.err.println("Resource not found: " + "BlueText.gif");
+            Logger.printErr("Resource not found: " + "BlueText.gif");
             return null;
         } else {
         	tray = new TrayIcon(icon);
@@ -229,14 +232,16 @@ public class TaskBar
 		try {
 			prop.load(new FileInputStream(lastLoggedIn() +".properties"));
 		} catch (Exception e) {
-			System.err.println("loading file problem.");
+			Logger.printErr("loading file problem.");
 		}		
 		prop.setProperty("save", Global.OFF);
 		try {
 			prop.store(new FileOutputStream(lastLoggedIn() +".properties"),null);
 		} catch (Exception e) {
-			System.err.println("storing file problem");
+			Logger.printErr("storing file problem");
 		}
+		
+		Logger.closeLogger();
     }
     
     /**
@@ -263,7 +268,7 @@ public class TaskBar
 		String iP =InetAddress.getLocalHost().getHostAddress();	
 		stmt.executeUpdate("UPDATE " + Global.DATABASE_TABLENAME + " SET IP_Computer='" + iP + "' WHERE phoneNumber='" + lastLoggedIn() + "';");
     	} catch (Exception e) {
-    		System.err.println("Automatic login fail\n" + e.getMessage());
+    		Logger.printErr("Automatic login fail\n" + e.getMessage());
     	}
 		
     }
