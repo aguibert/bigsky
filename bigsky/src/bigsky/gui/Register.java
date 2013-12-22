@@ -16,6 +16,8 @@ import java.sql.Statement;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import bigsky.Global;
+
 @SuppressWarnings("serial")
 public class Register extends JFrame {
 
@@ -263,10 +265,10 @@ public class Register extends JFrame {
 	private void putInSystem(){
 		try{
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://mysql.cs.iastate.edu/db30901", "adm309", "EXbDqudt4");
+		Connection con = DriverManager.getConnection(Global.DATABASE_URL, Global.DATABASE_USERNAME, Global.DATABASE_PASSWORD);
 		Statement stmt = con.createStatement();
 		
-		String query = "INSERT INTO testTable  (phoneNumber, lastName, firstName, password) VALUES " +
+		String query = "INSERT INTO " + Global.DATABASE_TABLENAME + "  (phoneNumber, lastName, firstName, password) VALUES " +
 				"('" + getUsername() + "', '" + getLastName() + "', '" + getFirstName() + "','" + getPassword(password) +
 				"')";
 	
@@ -284,9 +286,9 @@ public class Register extends JFrame {
 	private boolean isInSystem(){
 		try{
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://mysql.cs.iastate.edu/db30901", "adm309", "EXbDqudt4");
+		Connection con = DriverManager.getConnection(Global.DATABASE_URL, Global.DATABASE_USERNAME, Global.DATABASE_PASSWORD);
 	
-		ResultSet rs = con.createStatement().executeQuery("select * from testTable where phoneNumber='" + getUsername() + "'");
+		ResultSet rs = con.createStatement().executeQuery("select * from " + Global.DATABASE_TABLENAME + " where phoneNumber='" + getUsername() + "'");
 		if(rs.next() == true){
 			
 			rs.close();		

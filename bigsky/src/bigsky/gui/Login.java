@@ -182,11 +182,11 @@ public class Login extends JFrame {
 	public boolean login(){
 		try{
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://mysql.cs.iastate.edu/db30901", "adm309", "EXbDqudt4");
+		Connection con = DriverManager.getConnection(Global.DATABASE_URL, Global.DATABASE_USERNAME, Global.DATABASE_PASSWORD);
 		Statement stmt = con.createStatement();
 		String iP =InetAddress.getLocalHost().getHostAddress();		
 		
-		ResultSet rs = con.createStatement().executeQuery("select * from testTable where phoneNumber='" + getUsername() + "'");
+		ResultSet rs = con.createStatement().executeQuery("select * from " + Global.DATABASE_TABLENAME + " where phoneNumber='" + getUsername() + "'");
 	
 		if(rs.next() == false){
 			promptRegister.setVisible(true);
@@ -215,7 +215,7 @@ public class Login extends JFrame {
 
 		TaskBar.me = new Contact(rs.getString("firstName"),rs.getString("lastName"), rs.getString("phoneNumber"),null);
 
-		stmt.executeUpdate("UPDATE testTable SET IP_Computer='" + iP + "' WHERE phoneNumber='" + getUsername() + "';");
+		stmt.executeUpdate("UPDATE " + Global.DATABASE_TABLENAME + " SET IP_Computer='" + iP + "' WHERE phoneNumber='" + getUsername() + "';");
 		
 		rs.close();		
 		con.close();
@@ -260,9 +260,9 @@ public class Login extends JFrame {
 	    	Contact me = null;
     	try{
 	    	Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://mysql.cs.iastate.edu/db30901", "adm309", "EXbDqudt4");
+	    	Connection con = DriverManager.getConnection(Global.DATABASE_URL, Global.DATABASE_USERNAME, Global.DATABASE_PASSWORD);
 			
-			ResultSet rs = con.createStatement().executeQuery("select * from testTable where phoneNumber='" + Global.username + "'");
+			ResultSet rs = con.createStatement().executeQuery("select * from " + Global.DATABASE_TABLENAME + " where phoneNumber='" + Global.username + "'");
 	    	
 			if(rs.next()){
 				me = new Contact(rs.getString("firstName"),rs.getString("lastName"), rs.getString("phoneNumber"),null);

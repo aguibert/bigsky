@@ -256,12 +256,12 @@ public class TaskBar
      */
     public static void automaticIP(){
     	try {
-			Class.forName("com.mysql.jdbc.Driver");
-	
-		Connection con = DriverManager.getConnection("jdbc:mysql://mysql.cs.iastate.edu/db30901", "adm309", "EXbDqudt4");
+		Class.forName("com.mysql.jdbc.Driver");
+
+		Connection con = DriverManager.getConnection(Global.DATABASE_URL, Global.DATABASE_USERNAME, Global.DATABASE_PASSWORD);
 		Statement stmt = con.createStatement();
 		String iP =InetAddress.getLocalHost().getHostAddress();	
-		stmt.executeUpdate("UPDATE testTable SET IP_Computer='" + iP + "' WHERE phoneNumber='" + lastLoggedIn() + "';");
+		stmt.executeUpdate("UPDATE " + Global.DATABASE_TABLENAME + " SET IP_Computer='" + iP + "' WHERE phoneNumber='" + lastLoggedIn() + "';");
     	} catch (Exception e) {
     		System.err.println("Automatic login fail\n" + e.getMessage());
     	}

@@ -73,7 +73,6 @@ class ReadThread implements Runnable
 				}
 			}
 		} catch (Exception e) {
-			System.err.println("MessageHost's ClientConn is now closing");
 			if(TaskBar.messageHost != null){
 				TaskBar.messageHost.closeHost(true);
 			}
@@ -134,6 +133,8 @@ public class MessageHost extends Thread{
 	 *            method completes, taking the user back to the login screen.
 	 */
 	public void closeHost(boolean callLogout){
+		
+		System.out.println("MessageHost's ClientConn is now closing");
 		
 		if(alreadyCleaningUp){
 			return;

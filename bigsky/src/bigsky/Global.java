@@ -41,4 +41,8 @@ public class Global {
 	public static String ACCESS_TOKEN = null;
 	public static HashMap<String, ImageIcon> contactTOimageIcon = new HashMap<String, ImageIcon>();
 	public static ImageIcon defaultContactImage = null;
+	public final static String DATABASE_URL = "jdbc:mysql://mysql.cs.iastate.edu/db30901";
+	public final static String DATABASE_USERNAME = "adm309";
+	public final static String DATABASE_PASSWORD = "EXbDqudt4";
+	public final static String DATABASE_TABLENAME = "testTable";
 }
