@@ -186,7 +186,7 @@ public class SmallChat  {
 					updateConv(sent);
 				} catch (BadLocationException e1) {
 					e1.printStackTrace();
-					System.out.println("updateConv in SmallChat - FAILED");
+					Logger.printOut("updateConv in SmallChat - FAILED");
 				} 
 				textField.setText("");
 			}

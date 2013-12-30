@@ -171,7 +171,7 @@ public class Register extends JFrame {
 						Login.setVisible(true);
 						finishLogin.setVisible(true);
 					} catch (Exception e1) {
-						System.out.println("Register error");
+						Logger.printOut("Register error");
 					}
 				}
 	        }

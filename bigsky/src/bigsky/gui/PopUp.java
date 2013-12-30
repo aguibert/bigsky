@@ -9,6 +9,7 @@ import javax.swing.JPopupMenu;
 
 import bigsky.Contact;
 import bigsky.Global;
+import bigsky.Logger;
 
 /**
  * Popup that is displayed when you right click a contact name
@@ -35,7 +36,7 @@ public class PopUp extends JPopupMenu {
 						EditContact editCon = new EditContact(selectedContactCon, i, selectedValue);
 						editCon.getFrmEditContact().setVisible(true);
 					}
-					else System.out.println("Error in Edit Contact");
+					else Logger.printOut("Error in Edit Contact");
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "Please select a contact to edit.");

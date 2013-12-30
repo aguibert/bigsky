@@ -45,6 +45,8 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		new Logger();
+		
         if (!System.getProperty("os.name").contains("Mac")){
         	setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/bigsky/BlueText.gif")));
         }
@@ -131,7 +133,7 @@ public class Login extends JFrame {
 						throw new Exception();
 					}
 				} catch (Exception e1) {
-					System.out.println("Login checks fail");}			
+					Logger.printOut("Login checks fail");}			
             }
         });
 		

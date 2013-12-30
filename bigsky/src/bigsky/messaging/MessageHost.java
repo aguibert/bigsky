@@ -55,7 +55,7 @@ class ReadThread implements Runnable
 				{
 					TextMessage txtMessage = (TextMessage) streamObject;
 					txtMessage.setReceiver(user);
-					System.out.println("Client: " + txtMessage.getContent());					
+					Logger.printOut("Client: " + txtMessage.getContent());					
 					TaskBar.myTextArray.add(txtMessage);					
 					synchronized(TaskBar.textManager){
 						TaskBar.textManager.notify();
@@ -135,7 +135,7 @@ public class MessageHost extends Thread{
 	 */
 	public void closeHost(boolean callLogout){
 		
-		System.out.println("MessageHost's ClientConn is now closing");
+		Logger.printOut("MessageHost's ClientConn is now closing");
 		
 		if(alreadyCleaningUp){
 			return;

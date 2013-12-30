@@ -107,7 +107,7 @@ public class PopUp_FacebookContacts extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				String accessToken = textField.getText();
 				if(accessToken == null || accessToken.length() < 10){
-					System.out.println("Please paste access token above.");
+					Logger.printOut("Please paste access token above.");
 				}
 				Global.ACCESS_TOKEN = accessToken;
 				thisFrame.setVisible(false);

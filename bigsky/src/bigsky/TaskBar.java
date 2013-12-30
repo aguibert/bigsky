@@ -45,14 +45,14 @@ public class TaskBar
 
     public static void main(String[] args) {
     	
-    	new Logger();
-    	
         try {
         	UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         UIManager.put("swing.boldMetal", Boolean.FALSE);
+        
+        new Logger();
         
         // Checks to see if the user setting is to save username and password
         if(savedInfo(Global.save, Global.ON)){
@@ -82,7 +82,7 @@ public class TaskBar
 
     private static void initialize() {
         if (!SystemTray.isSupported()) {
-            System.out.println("SystemTray is not supported");
+            Logger.printOut("SystemTray is not supported");
             return;
         }
 
@@ -163,7 +163,7 @@ public class TaskBar
 		try {
 			prop.load(new FileInputStream(lastLoggedIn() +".properties"));
 		} catch (Exception e) {
-			System.out.println("No previous login file located.");
+			Logger.printOut("No previous login file located.");
 		}
 
 		if(compare.equals(prop.getProperty(property))){
@@ -184,7 +184,7 @@ public class TaskBar
 		try {
 			prop.load(new FileInputStream(lastLoggedIn() +".properties"));
 		} catch (Exception e) {
-			System.out.println("No previous login file located.");
+			Logger.printOut("No previous login file located.");
 		}
 
 		return prop.getProperty(property);
@@ -201,7 +201,7 @@ public class TaskBar
 		try {
 			prop.load(new FileInputStream("system.properties"));
 		} catch (Exception e) {
-			System.out.println("No previous system properties located, using defaults.");
+			Logger.printOut("No previous system properties located, using defaults.");
 		}
 		
 		return (String) prop.get("lastLoggedIn");
