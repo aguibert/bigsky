@@ -20,26 +20,34 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class Logger {
+/**
+ * Logging class for BlueText 
+ * @author Andrew
+ */
+public class Logger{
 	
 	private static boolean loggingEnabled;
 	private static File logFile = null;
 	private static PrintStream ps = null;
 	private static boolean noError = true;
 	private static boolean isOpenLogger = false;
+	private static PrintStream normalOut = null;
+	private static PrintStream normalErr = null;
+	private static final int SEVERITY_STD = 1;
+	private static final int SEVERITY_ERR = 0;
 	
+	/**
+	 * Constructs a new logger instance for the run if 
+	 * one does not already exist.  Sets System.out and
+	 * System.err to the log file.
+	 */
 	public Logger()
 	{
 		Logger.loggingEnabled = Global.loggingEnabled;
-		if(!Logger.loggingEnabled)
+		if(!Logger.loggingEnabled || isOpenLogger)
 			return;
 		
-		if(isOpenLogger){
-			return;
-		}
-		else{
-			isOpenLogger = true;
-		}
+		isOpenLogger = true;
 		
 		String timeString = new Timestamp(new java.util.Date().getTime()).toString();
 		timeString = timeString.replace(' ', '-').replace(':', '-').replace('.', '-');
@@ -51,6 +59,8 @@ public class Logger {
 			return;
 		}
 		
+		normalOut = System.out;
+		normalErr = System.err;
 		System.setErr(ps);
 		System.setOut(ps);
 		
@@ -64,8 +74,14 @@ public class Logger {
 				TaskBar.me.toString();
 			}
 		} catch (UnknownHostException e) {}
+		
+		Logger.printErr("Test error message");
 	}
 
+	/**
+	 * Logs an error message.
+	 * @param err The error to be written to log file.
+	 */
 	public static void printErr(String err)
 	{
 		if(!loggingEnabled)
@@ -73,29 +89,53 @@ public class Logger {
 		
 		noError = false;
 				
-		System.err.println(formatLogString(err));
+		System.err.println(formatLogString(err, SEVERITY_ERR));
 	}
 	
+	/**
+	 * Logs a normal output message.
+	 * @param out The message to be written to log file.
+	 */
 	public static void printOut(String out)
 	{		
 		if(!loggingEnabled)
 			return;
 		
-		System.out.println(formatLogString(out));
+		System.out.println(formatLogString(out, SEVERITY_STD));
 	}
 	
-	private static String formatLogString(String msg)
+	private static String formatLogString(String msg, int severity)
 	{
 		String timeString = new Timestamp(new java.util.Date().getTime()).toString();
 
-		StringBuffer sb = new StringBuffer(String.format("%-28s", '[' + timeString + ']'));
+		StringBuffer sb = new StringBuffer(String.format("%-27s", '[' + timeString + ']'));
+		if(severity == SEVERITY_ERR){
+			sb.append("ERR  ");
+		}
+		else{
+			sb.append("OUT  ");
+		}
 		StackTraceElement ste = Thread.currentThread().getStackTrace()[Thread.currentThread().getStackTrace().length - 1];
 		sb.append(String.format("%-50s", ste.getClassName() + '.' + ste.getMethodName() + '@' + ste.getLineNumber()));
 		sb.append(msg);
 		
+		// Also echo output to standard console
+		if(severity == SEVERITY_ERR){
+			normalErr.println(sb.toString());
+		}
+		else{
+			normalOut.println(sb.toString());
+		}
+		
 		return sb.toString();
 	}
 	
+	/**
+	 * Closes the log file.
+	 * If there were no errors, delete the log file.
+	 * If there were errors, email the log file to 
+	 * blueTextLogger@gmail.com so we can look at it later.
+	 */
 	public static void closeLogger()
 	{
 		if(!loggingEnabled)
