@@ -75,7 +75,6 @@ public class Logger{
 			}
 		} catch (UnknownHostException e) {}
 		
-		Logger.printErr("Test error message");
 	}
 
 	/**
@@ -178,7 +177,11 @@ class EmailLogFile extends Thread
 	        String[] to = { RECIPIENT }; // list of recipient email addresses
 	        String subject = "Error log from: ";
 	        if(TaskBar.me == null || TaskBar.me.getFirstName() == null || TaskBar.me.getFirstName().equalsIgnoreCase("me")){
-	        	subject += Inet4Address.getLocalHost().getHostAddress();
+	        	try{
+	        		subject += Inet4Address.getLocalHost().getHostAddress();
+	        	} catch (Exception e){
+	        		subject += TaskBar.me.toString();
+	        	}
 	        }
 	        else{
 	        	subject += TaskBar.me.toString();
@@ -233,8 +236,7 @@ class EmailLogFile extends Thread
             transport.connect(host, from, pass);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
-        }
-        catch (Exception ex){
+        } catch (Exception ex){
         	// nothing we can do about exceptions at this point
         }
 	}
