@@ -207,7 +207,6 @@ public class EditContact {
 	 * @param lastName - last name of new contact
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	private boolean addContactToListModel(String firstName, String lastName){
 		String newEntry;
 		if (!firstName.equals("")){

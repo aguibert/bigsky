@@ -148,7 +148,6 @@ public class RequestManager extends Thread
 	}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void addContactToListModel(String firstName, String lastName){
 		if (!firstName.equals("")){
 			String newEntry = firstName + " " + lastName;

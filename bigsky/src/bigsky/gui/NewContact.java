@@ -189,7 +189,6 @@ public class NewContact {
 		return c;
 	}
 	
-	@SuppressWarnings("unchecked")
 	private boolean addContactToListModel(String firstName, String lastName){
 		String newEntry;
 		if (!firstName.equals("")){

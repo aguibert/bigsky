@@ -458,7 +458,6 @@ public class Conversation {
 	 * Modify the list model to only display items that match the requirements of the searchTerm
 	 * @param searchTerm - The text entered into the search bar
 	 */
-	@SuppressWarnings("unchecked")
 	private void searchContact(String searchTerm){
 		Global.listModel.removeAllElements();
 		if (!searchTerm.equals("")){
@@ -496,7 +495,6 @@ public class Conversation {
 	 * @param firstName - First name of contact to be added
 	 * @param lastName - Last name of contact to be added
 	 */
-	@SuppressWarnings("unchecked")
 	private void addContactToListModel(String firstName, String lastName){
 		if (!firstName.equals("")){
 			String newEntry = firstName + " " + lastName;
@@ -537,7 +535,6 @@ public class Conversation {
 	/**
 	 * Sort List Model Alphabetically by last first name
 	 */
-	@SuppressWarnings("unchecked")
 	private void sortListModel(){
 		String[] tempList = new String[Global.listModel.size()];
 		for (int i=0; i<Global.listModel.size(); i++) {
