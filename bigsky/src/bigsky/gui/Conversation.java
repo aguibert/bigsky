@@ -638,7 +638,7 @@ public class Conversation {
 			if(facebookID == null)
 				throw new Exception("Unable to find facebook id in username.properties file");
 			
-			URL url = new URL("http://graph.facebook.com/" + facebookID + "/picture?type=large");
+			URL url = new URL("https://graph.facebook.com/" + facebookID + "/picture?type=large");
 			BufferedImage bi = ImageIO.read(url);
 			ImageIcon img = new ImageIcon(bi.getScaledInstance(180, 180, Image.SCALE_SMOOTH));
 			Global.contactTOimageIcon.put(c.getPhoneNumber(), img);
